@@ -1,0 +1,28 @@
+#lang racket
+
+; Función que regresa el factorial de un número dado
+(define (factorial n)
+  (cond[(= n 0) 1]
+       [else (* n (factorial (- n 1)))]))
+
+; Función que regresa la suma de los elementos de una función 
+(define (suma lista)
+  (cond[(empty? lista) 0]
+       [else (+ (car lista) (suma (cdr lista)))]))
+
+; Función que regrsa la longitud de la lista 
+(define (longitud lista)
+  (cond[(empty? lista) 0]
+       [else (+ 1 (longitud (cdr lista)))]))
+
+; Función que regresa el fibonacci de un número 
+(define (fib n)
+  (if (<= n 2)
+      1
+      (+ (fib (- n 1)) (fib (- n 2)))))
+
+; Función que mapea una función a los elementos de una lista 
+(define (mapear funcion lista)
+  (cond[(empty? lista) lista]
+       [else (cons (funcion (car lista)) (mapear funcion (cdr lista)))])) 
+

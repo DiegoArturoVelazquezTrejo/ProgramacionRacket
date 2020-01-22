@@ -1,0 +1,66 @@
+#lang racket
+
+; Función que regresa el factorial de un número dado
+(define (factorial n)
+  (cond[(= n 0) 1]
+       [else (* n (factorial (- n 1)))]))
+
+; Función que regresa la suma de los elementos de una función 
+(define (suma lista)
+  (cond[(empty? lista) 0]
+       [else (+ (car lista) (suma (cdr lista)))]))
+
+; Función que regrsa la longitud de la lista 
+(define (longitud lista)
+  (cond[(empty? lista) 0]
+       [else (+ 1 (longitud (cdr lista)))]))
+
+; Función que regresa el fibonacci de un número 
+(define (fib n)
+  (if (<= n 2)
+      1
+      (+ (fib (- n 1)) (fib (- n 2)))))
+
+; Función que mapea una función a los elementos de una lista 
+(define (mapear funcion lista)
+  (cond[(empty? lista) lista]
+       [else (cons (funcion (car lista)) (mapear funcion (cdr lista)))])) 
+
+; Función que elimina los elementos especificados de una lista
+(define (remove elemento lista)
+  (cond[(empty? lista) lista]
+       [else (if (not(= elemento (car lista)))
+                 (cons (car lista) (remove elemento (cdr lista)))
+                 (remove elemento (cdr lista)))]))
+
+; Función que filtra los elementos que se buscan                 
+(define (filtra funcion lista)
+  (cond[(empty? lista) lista]
+       [else (if( funcion (car lista))
+                (cons (car lista) (filtra funcion (cdr lista)))
+                (filtra funcion (cdr lista)))]))
+
+; Esta función lo que hace es la suma de los dígitos del numero n 
+(define (sum_digits numero)
+  (if (= numero 0)
+      0
+      (+ (modulo numero 10) (sum_digits (floor (/ numero 10))))))
+
+; Esta función realiza la suma de los dígitos de un número n hasta llegar a ser menor a 10 
+(define (s_digito numero)
+  (if (< numero 10)
+      numero
+      (s_digito (sum_digits numero))))
+
+
+; Esta función verifica si la lista está ordenada de forma decremental 
+(define (reversa lista)
+  (if (= (longitud lista) 1)
+      #t
+      ( if(< (car lista) (car (cdr lista)))
+          #f
+          ( reversa (cdr lista)))))
+
+; Función para calcular el área total
+(define (area_total radio generatriz)
+  (+ (* (* pi radio) generatriz) (* (* pi radio) radio)))(
