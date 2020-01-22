@@ -1,5 +1,7 @@
 #lang racket
 
+; Se escribe lang racket para indicarle al comilador que se programará en racket. 
+
 ; Función que regresa el factorial de un número dado
 (define (factorial n)
   (cond[(= n 0) 1]
