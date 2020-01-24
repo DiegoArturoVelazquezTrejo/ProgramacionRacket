@@ -1,6 +1,6 @@
 #lang racket
 
-; Se escribe lang racket para indicarle al comilador que se programará en racket. 
+; Se escribe lang racket para indicarle al compilador que se programará en racket. 
 
 ; Función que regresa el factorial de un número dado
 (define (factorial n)
@@ -65,4 +65,42 @@
 
 ; Función para calcular el área total
 (define (area_total radio generatriz)
-  (+ (* (* pi radio) generatriz) (* (* pi radio) radio)))(
+  (+ (* (* pi radio) generatriz) (* (* pi radio) radio)))
+
+; Función entierra elemento
+(define (entierra elemento nivel)
+  (if (= nivel 0) elemento
+      (list (entierra elemento (- nivel 1)))))
+
+; Función que reemplaza elementos dentro de una lista
+(define (reemplaza elemento reemplazo lista)
+  (if (= (longitud lista) 0) lista
+      ( if (eq? (car lista) elemento)
+           (cons reemplazo (reemplaza elemento reemplazo (cdr lista)))
+           (cons (car lista) (reemplaza elemento reemplazo (cdr lista))))))
+
+; Función listtypeof verifica si todos los elementos de una lista son del mismo tipo 
+(define (listoftype? predicado lista)
+  (if (empty? lista)
+      #t
+      (if(predicado (car lista)) 
+         (and #t (listoftype? predicado (cdr lista)))
+         #f)))
+
+; Definiendo estructuras en Racket
+(struct persona (nombre edad peso altura)#:transparent)
+
+
+; Función para obtener el IMC por persona 
+(define (imc persona)
+  (/ (persona-peso persona)
+  (expt (persona-altura persona) 2)))
+
+; Función generadora del numero medio
+(struct interval (x y) #:transparent)
+
+; Función que calcula el punto intermedio de un intervalo 
+(define (guess inv)
+  (/ (+ (interval-x inv) (interval-y inv)) 2))
+
+

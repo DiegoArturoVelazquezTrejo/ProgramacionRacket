@@ -1,0 +1,7 @@
+#lang plai 
+
+; Construyendo nuestros tipos de datos abstractos
+[define-type MiLista
+  [vacia]
+  [nlista (c number?) (l MiLista?)]
+  [slista (s symbol?) (l MiLista?)]]
