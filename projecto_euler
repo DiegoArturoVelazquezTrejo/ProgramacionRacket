@@ -1,0 +1,27 @@
+#lang racket
+; Función auxiliar que te dice si un número es primo, dividiendolo con el divisor 
+(define (primo_auxiliar numero divisor)
+  (if (= divisor 1)
+      #t
+      (if (= (modulo numero divisor) 0)
+          #f
+          (primo_auxiliar numero (- divisor 1)))))
+  
+; Función que te dice si un número es primo 
+(define (primo numero)
+  (primo_auxiliar numero (floor (/ numero 2))))
+
+; Función auxiliar de divisores que comienza desde prime n/2 hasta 0
+(define (divisores_auxiliar numero divisor)
+  (if (= (modulo numero divisor) 0)
+      (if (primo divisor)
+          divisor
+          (divisores_auxiliar numero (- divisor 1)))
+      (divisores_auxiliar numero (- divisor 1))))
+
+; Función que te regrese el primo mayor 
+(define (primo_mayor numero)
+  (divisores_auxiliar numero (floor (/ numero 2))))
+
+; Estructura de un arbol binario 
+(struct tree (izq raiz der) #:transparent)
